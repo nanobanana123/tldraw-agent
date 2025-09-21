@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"test": "vitest run",
 		"test:e2e": "playwright test",
-		"build:functions": "node functions/build.mjs",
+		"build:functions": "npm --prefix functions run build",
 		"firebase:emulate": "npm run build && npm run build:functions && firebase emulators:start --project productshot2 --only hosting,functions"
 	},
 	"dependencies": {

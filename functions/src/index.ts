@@ -1,6 +1,7 @@
-import express, { Request, Response } from 'express'
-import * as functions from 'firebase-functions'
-import { Readable } from 'stream'
+import express, { type Request, type Response as ExpressResponse } from 'express'
+import { onRequest } from 'firebase-functions/v2/https'
+import { setGlobalOptions } from 'firebase-functions/v2'
+import { Readable } from 'node:stream'
 import { AgentService } from '../../worker/do/AgentService'
 import type { Environment } from '../../worker/environment'
 import { knowledge } from '../../worker/routes/knowledge'
@@ -21,7 +22,7 @@ app.options('*', (_req, res) => {
 })
 
 function buildEnv(): Environment {
-	const configEnv = (functions.config().env ?? {}) as Record<string, string | undefined>
+	const configEnv = (process.env.FUNCTIONS_EMULATOR === 'true' ? process.env : {}) as Record<string, string | undefined>
 	return {
 		OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? configEnv.openai_api_key ?? '',
 		ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ?? configEnv.anthropic_api_key ?? '',
@@ -30,7 +31,7 @@ function buildEnv(): Environment {
 	}
 }
 
-app.post('/stream', async (req: Request, res: Response) => {
+app.post('/stream', async (req: Request, res: ExpressResponse) => {
 	res.set({
 		...corsHeaders,
 		'Content-Type': 'text/event-stream',
@@ -66,15 +67,15 @@ app.post('/stream', async (req: Request, res: Response) => {
 	}
 })
 
-app.get('/knowledge', async (req: Request, res: Response) => {
+app.get('/knowledge', async (req: Request, res: ExpressResponse) => {
 	await forwardResponse(res, await knowledge(toRequest(req), buildEnv()))
 })
 
-app.get('/inspiration', async (req: Request, res: Response) => {
+app.get('/inspiration', async (req: Request, res: ExpressResponse) => {
 	await forwardResponse(res, await inspiration(toRequest(req), buildEnv()))
 })
 
-app.post('/analyze-image', async (req: Request, res: Response) => {
+app.post('/analyze-image', async (req: Request, res: ExpressResponse) => {
 	await forwardResponse(
 		res,
 		await analyzeImage(
@@ -102,7 +103,7 @@ function toRequest(req: Request) {
 	})
 }
 
-async function forwardResponse(res: Response, response: Response) {
+async function forwardResponse(res: ExpressResponse, response: globalThis.Response) {
 	res.status(response.status)
 	response.headers.forEach((value, key) => {
 		res.setHeader(key, value)
@@ -127,6 +128,8 @@ async function forwardResponse(res: Response, response: Response) {
 	readable.pipe(res)
 }
 
-exports.tldrawAgent = functions
-	.runWith({ memory: '1GB', timeoutSeconds: 120 })
-	.https.onRequest(app)
+setGlobalOptions({ region: 'us-central1', maxInstances: 2 })
+
+export const tldrawAgent = onRequest({ timeoutSeconds: 120, memory: '1GiB' }, (req, res) => {
+	app(req as any, res as any)
+})

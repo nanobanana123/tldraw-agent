@@ -213,7 +213,7 @@ async function insertImageFromFile(editor: Editor, agent: TldrawAgent, file: Fil
 		throw new Error('Image shape was not created')
 	}
 
-	editor.selectShapes([shapeId])
+	editor.setSelectedShapes([shapeId])
 	const simpleShape = convertTldrawShapeToSimpleShape(editor, createdShape)
 	agent.addToContext({ type: 'shape', shape: simpleShape, source: 'user' })
 }
