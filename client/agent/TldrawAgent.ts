@@ -738,16 +738,6 @@ function requestAgent({ agent, request }: { agent: TldrawAgent; request: AgentRe
 	const signal = controller.signal
 	const helpers = new AgentHelpers(agent)
 	helpers.setImageExpectationFromRequest(request)
-	if (
-		helpers.expectImageResponse &&
-		request.modelName !== 'gemini-2.5-flash-image'
-	) {
-		console.info('[requestAgent] Switching model to gemini-2.5-flash-image for image generation', {
-			previousModel: request.modelName,
-		})
-		request.modelName = 'gemini-2.5-flash-image'
-		agent.$modelName.set('gemini-2.5-flash-image')
-	}
 
 	const requestPromise = (async () => {
 		const prompt = await agent.preparePrompt(request, helpers)
