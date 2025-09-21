@@ -53,6 +53,24 @@ Run the development server with `yarn dev` or `npm run dev`.
 
 Open `http://localhost:5173/` in your browser to see the app.
 
+### Firebase emulator (optional)
+
+If you want to exercise the app exactly the way it will run on Firebase Hosting + Functions, you can spin up the local emulators:
+
+1. Install the Firebase CLI if you haven’t already:
+	```
+	npm install -g firebase-tools
+	firebase login
+	```
+2. Update `.firebaserc` with your project id (`your-firebase-project-id`).
+3. Run the emulator (this builds the app, installs `functions/` deps, and starts Hosting + Functions on ports 5000/5001):
+	```
+	npm run firebase:emulate
+	```
+4. Visit `http://127.0.0.1:5000` for the SPA and `http://127.0.0.1:4000` for the emulator UI.
+
+Environment variables (e.g. `GOOGLE_API_KEY`) can be supplied with `firebase functions:config:set env.google_api_key="VALUE"` or by exporting them in your shell before starting the emulators.
+
 ## Agent overview
 
 With its default configuration, the agent can perform the following actions:

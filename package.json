@@ -8,7 +8,8 @@
 		"dev": "vite",
 		"preview": "vite preview",
 		"test": "vitest run",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"firebase:emulate": "npm run build && (cd functions && npm install) && firebase emulators:start --only hosting,functions"
 	},
 	"dependencies": {
 		"@ai-sdk/anthropic": "^2.0.17",

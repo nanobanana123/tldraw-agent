@@ -3,6 +3,8 @@ node_modules
 .yarn/
 .dev.vars
 *.dev.vars
+/.firebase
+firebase-debug.log*
 dist/
 .tsbuild/
 .wrangler/
