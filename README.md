@@ -2,7 +2,34 @@
 
 This starter kit demonstrates how to build an AI agent that can manipulate the [tldraw](https://github.com/tldraw/tldraw) canvas.
 
-It features a chat panel on the right-hand-side of the screen where the user can communicate with the agent, add context and see chat history.
+It now ships with:
+
+- ✅ Gemini 2.5 Flash image generation/editing routed through a Cloudflare Worker (`/images/generate`).
+- ✅ zh-CN translation overrides so production builds no longer log missing-key warnings.
+- ✅ Back-end Vitest coverage for the image endpoint and a Playwright scenario that generates a yellow banana, edits it to orange, and verifies the response.
+
+The UI features a chat panel on the right-hand side of the screen where the user can communicate with the agent, add context, and see chat history.
+
+If you just cloned this repo, jump to [Quick start](#quick-start) or [Testing](#testing) for the commands you’ll probably want to run first.
+
+## Environment setup
+
+## Quick start
+
+```bash
+npm install
+npm run dev          # http://localhost:5173
+```
+
+If you’ve configured the optional API keys (see below) you can also:
+
+```bash
+npm run build
+npm run test -- generateImage
+npm run test:e2e -- --project=chromium --grep="Gemini image edit" --timeout=60000
+```
+
+The Playwright suite uses recorded network mocks and does not require live Gemini access.
 
 ## Environment setup
 
