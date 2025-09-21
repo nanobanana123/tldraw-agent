@@ -154,6 +154,8 @@ function convertTextShapeToTldrawShape(
 		scale = defaultTextShape.props.scale ?? 1
 	}
 
+	const text = simpleShape.text ?? defaultTextShape.props?.text ?? ''
+
 	const autoSize =
 		simpleShape.wrap === undefined ? (defaultTextShape.props?.autoSize ?? true) : !simpleShape.wrap
 	const textFontSize = FONT_SIZES[textSize]
@@ -164,7 +166,7 @@ function convertTextShapeToTldrawShape(
 
 	const effectiveFontSize = textFontSize * scale
 
-	const measurement = editor.textMeasure.measureText(simpleShape.text, {
+	const measurement = editor.textMeasure.measureText(text, {
 		...TEXT_PROPS,
 		fontFamily: FONT_FAMILIES[font as keyof typeof FONT_FAMILIES],
 		fontSize: effectiveFontSize,
@@ -205,7 +207,7 @@ function convertTextShapeToTldrawShape(
 			props: {
 				size: textSize,
 				scale,
-				richText: toRichText(simpleShape.text),
+				richText: toRichText(text),
 				color: asColor(simpleShape.color ?? defaultTextShape.props?.color ?? 'black'),
 				textAlign,
 				autoSize,
