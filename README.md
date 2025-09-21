@@ -6,7 +6,8 @@ It now ships with:
 
 - ✅ Gemini 2.5 Flash image generation/editing routed through a Cloudflare Worker (`/images/generate`).
 - ✅ zh-CN translation overrides so production builds no longer log missing-key warnings.
-- ✅ Back-end Vitest coverage for the image endpoint and a Playwright scenario that generates a yellow banana, edits it to orange, and verifies the response.
+- ✅ Research & inspiration helpers (Smart Plan, Knowledge lookup, Inspiration search, Image analyzer, Design direction/guidance) so the agent can mirror professional creative workflows.
+- ✅ Back-end Vitest coverage for the image endpoint plus knowledge/inspiration/analyzer routes, and a Playwright scenario that generates a yellow banana, edits it to orange, and verifies the response.
 
 The UI features a chat panel on the right-hand side of the screen where the user can communicate with the agent, add context, and see chat history.
 

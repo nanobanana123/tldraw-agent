@@ -6,19 +6,25 @@ import { BringToFrontActionUtil } from './actions/BringToFrontActionUtil'
 import { ClearActionUtil } from './actions/ClearActionUtil'
 import { CountryInfoActionUtil } from './actions/CountryInfoActionUtil'
 import { CountShapesActionUtil } from './actions/CountShapesActionUtil'
+import { DesignDirectionActionUtil } from './actions/DesignDirectionActionUtil'
+import { DesignGuidanceActionUtil } from './actions/DesignGuidanceActionUtil'
 import { CreateActionUtil } from './actions/CreateActionUtil'
 import { CreateImageActionUtil } from './actions/CreateImageActionUtil'
 import { DeleteActionUtil } from './actions/DeleteActionUtil'
 import { DistributeActionUtil } from './actions/DistributeActionUtil'
+import { ImageAnalysisActionUtil } from './actions/ImageAnalysisActionUtil'
+import { InspirationActionUtil } from './actions/InspirationActionUtil'
 import { LabelActionUtil } from './actions/LabelActionUtil'
 import { MessageActionUtil } from './actions/MessageActionUtil'
 import { MoveActionUtil } from './actions/MoveActionUtil'
+import { PlanActionUtil } from './actions/PlanActionUtil'
 import { PenActionUtil } from './actions/PenActionUtil'
 import { PlaceActionUtil } from './actions/PlaceActionUtil'
 import { RandomWikipediaArticleActionUtil } from './actions/RandomWikipediaArticleActionUtil'
 import { ResizeActionUtil } from './actions/ResizeActionUtil'
 import { ReviewActionUtil } from './actions/ReviewActionUtil'
 import { RotateActionUtil } from './actions/RotateActionUtil'
+import { KnowledgeActionUtil } from './actions/KnowledgeActionUtil'
 import { SendToBackActionUtil } from './actions/SendToBackActionUtil'
 import { SetMyViewActionUtil } from './actions/SetMyViewActionUtil'
 import { StackActionUtil } from './actions/StackActionUtil'
@@ -94,6 +100,7 @@ export const AGENT_ACTION_UTILS = [
 	ThinkActionUtil,
 	ReviewActionUtil,
 	AddDetailActionUtil,
+	PlanActionUtil,
 	TodoListActionUtil,
 	SetMyViewActionUtil,
 
@@ -104,6 +111,9 @@ export const AGENT_ACTION_UTILS = [
 	UpdateActionUtil,
 	LabelActionUtil,
 	MoveActionUtil,
+	DesignDirectionActionUtil,
+	DesignGuidanceActionUtil,
+	ImageAnalysisActionUtil,
 
 	// Groups of shapes
 	PlaceActionUtil,
@@ -115,6 +125,10 @@ export const AGENT_ACTION_UTILS = [
 	DistributeActionUtil,
 	StackActionUtil,
 	ClearActionUtil,
+
+	// Research & inspiration
+	KnowledgeActionUtil,
+	InspirationActionUtil,
 
 	// Drawing
 	PenActionUtil,

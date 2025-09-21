@@ -3,6 +3,9 @@ import { WorkerEntrypoint } from 'cloudflare:workers'
 import { AutoRouter, cors, error, IRequest } from 'itty-router'
 import { Environment } from './environment'
 import { stream } from './routes/stream'
+import { knowledge } from './routes/knowledge'
+import { inspiration } from './routes/inspiration'
+import { analyzeImage } from './routes/analyzeImage'
 import { generateImage } from './routes/images'
 
 const { preflight, corsify } = cors({ origin: '*' })
@@ -16,6 +19,9 @@ const router = AutoRouter<IRequest, [env: Environment, ctx: ExecutionContext]>({
 	},
 })
 	.post('/stream', stream)
+	.get('/knowledge', knowledge)
+	.get('/inspiration', inspiration)
+	.post('/analyze-image', (request, env) => analyzeImage(request, env))
 	.post('/images/generate', (request, env) => generateImage(request, env))
 
 export default class extends WorkerEntrypoint<Environment> {
