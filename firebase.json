@@ -10,19 +10,58 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      { "source": "/(stream|knowledge|inspiration|analyze-image)", "function": "tldrawAgent" },
-      { "source": "**", "destination": "/index.html" }
+      {
+        "source": "/(stream|knowledge|inspiration|analyze-image)",
+        "function": "tldrawAgent"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
   "emulators": {
     "functions": {
-      "port": 5001
+      "host": "127.0.0.1",
+      "port": 6200
     },
     "hosting": {
-      "port": 5000
+      "host": "127.0.0.1",
+      "port": 6020
     },
     "ui": {
       "enabled": true
-    }
+    },
+    "apphosting": {
+      "port": 5002,
+      "rootDirectory": "./",
+      "startCommand": "npm run dev"
+    },
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "pubsub": {
+      "port": 8085
+    },
+    "storage": {
+      "port": 9199
+    },
+    "eventarc": {
+      "port": 9299
+    },
+    "dataconnect": {
+      "port": 9399,
+      "dataDir": "dataconnect/.dataconnect/pgliteData"
+    },
+    "tasks": {
+      "port": 9499
+    },
+    "singleProjectMode": true
   }
 }

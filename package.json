@@ -9,7 +9,8 @@
 		"preview": "vite preview",
 		"test": "vitest run",
 		"test:e2e": "playwright test",
-		"firebase:emulate": "npm run build && (cd functions && npm install) && firebase emulators:start --only hosting,functions"
+		"build:functions": "node functions/build.mjs",
+		"firebase:emulate": "npm run build && npm run build:functions && firebase emulators:start --project productshot2 --only hosting,functions"
 	},
 	"dependencies": {
 		"@ai-sdk/anthropic": "^2.0.17",
@@ -35,6 +36,7 @@
 		"@types/react": "^18.3.18",
 		"@types/react-dom": "^18.3.5",
 		"@vitejs/plugin-react-swc": "^3.10.2",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.9.2",
 		"vite": "^7.1.6",
 		"vitest": "^3.2.4"

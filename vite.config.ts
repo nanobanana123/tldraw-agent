@@ -6,5 +6,8 @@ import { defineConfig } from 'vite'
 export default defineConfig(() => {
 	return {
 		plugins: [cloudflare(), react()],
+		build: {
+			chunkSizeWarningLimit: 2500,
+		},
 	}
 })

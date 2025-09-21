@@ -63,10 +63,11 @@ If you want to exercise the app exactly the way it will run on Firebase Hosting 
 	firebase login
 	```
 2. Update `.firebaserc` with your project id (`your-firebase-project-id`).
-3. Run the emulator (this builds the app, installs `functions/` deps, and starts Hosting + Functions on ports 5000/5001):
-	```
-	npm run firebase:emulate
-	```
+3. Run the emulator (the script builds the web bundle, bundles the Cloud Function with esbuild, and starts Hosting + Functions):
+    ```
+    npm run firebase:emulate
+    ```
+    Hosting defaults to `http://127.0.0.1:6020`, Functions to `http://127.0.0.1:6200`.
 4. Visit `http://127.0.0.1:5000` for the SPA and `http://127.0.0.1:4000` for the emulator UI.
 
 Environment variables (e.g. `GOOGLE_API_KEY`) can be supplied with `firebase functions:config:set env.google_api_key="VALUE"` or by exporting them in your shell before starting the emulators.
